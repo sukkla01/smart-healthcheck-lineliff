@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.bg-dark {
+  background-color: #3f51b5!important;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* #wrap {
+  min-height: 90%;
+  margin-top: 100px;
+} */
+
+#main {
+  overflow: auto;
+  padding-bottom: 180px;
+  /* must be same height as the footer */
+}
+
+#footer {
+  position:absolute;
+  bottom: 0px;
+  width:100%;
+  height:10px;  
+  padding-left: 20px;
+  padding-right: 20px; 
+  /* background:blue; */
+
+}
+
+.card.green {
+  background: linear-gradient(150deg, #39ef74, #4600f1 100%);
+}
+
+.card.purple {
+  background: linear-gradient(150deg, #f731db, #4600f1 100%);
+}
+
+.card {
+  width: 300px;
+  /* box-sizing: border-box; */
+  padding: 2em;
+  /* font-family: Ubuntu; */
+  border-radius: 1.25rem;
+  color: white;
+  line-height: 25px;
+  box-shadow: 5px 5px 10px #ccc;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
