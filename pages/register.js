@@ -91,12 +91,6 @@ const Register = () => {
                 alert(error)
             }
 
-
-
-
-
-
-
         }
     }
 
