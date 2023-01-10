@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
        
         tkey  =  tkey == null ? '': tkey
         //xxxxxddd
-        // liff.login({ redirectUri: `https://queue-ss.diligentsoftinter.com/${tkey}` })
+        liff.login({ redirectUri: `https://queue-ss.diligentsoftinter.com/${tkey}` })
 
 
       }

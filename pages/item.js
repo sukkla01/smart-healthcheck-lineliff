@@ -50,9 +50,9 @@ const Item = () => {
             getCid(profile.userId, profile.pictureUrl)
 
         }
-        getCid('xxxx', '')
+        // getCid('xxxx', '')
         getMore()
-        // getData()
+        getData()
         // getPttype()
     }, [])
 

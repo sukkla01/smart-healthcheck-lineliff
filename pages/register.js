@@ -7,6 +7,7 @@ import config from '../config'
 import ReactLoading from 'react-loading';
 import styled from "tachyons-components";
 import LoadingSkeleton from '../component/LoadingSkeleton';
+import Head from 'next/head'
 
 const BASE_URL = config.BASE_URL
 const token = config.token
@@ -38,7 +39,7 @@ const Register = () => {
 
 
         }
-        // getData()
+        getData()
     }, [])
 
 
@@ -96,6 +97,9 @@ const Register = () => {
 
     return (
         <div style={{ textAlign: "center" }}>
+               <Head>
+        <title>xxx</title>
+      </Head>
             <NavHeader />
 
             <div style={{ paddingTop: '20%', textAlign: 'center' }}>

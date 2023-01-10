@@ -7,6 +7,7 @@ import axios from 'axios'
 import config from '../config'
 import ReactLoading from 'react-loading';
 import styled from "tachyons-components";
+import Head from 'next/head'
 
 const BASE_URL = config.BASE_URL
 const token = config.token
@@ -108,8 +109,10 @@ const Pttype = () => {
     }
     return (
         <div>
+             <Head>
+        <title>My page title</title>
+      </Head>
             <NavHeader />
-
             <div className='container' style={{ paddingTop: '17%' }}>
 
                 {/* Profile */}
