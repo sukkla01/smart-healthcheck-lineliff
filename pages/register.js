@@ -47,6 +47,7 @@ const Register = () => {
     const getCid = async (userId) => {
         try {
             let res = await axios.get(`${BASE_URL}/get-register-cid/${userId}`, { headers: { "token": token } })
+
             setIsLoading(false)
             if (res.data.length > 0) {
                 router.push({
@@ -71,12 +72,13 @@ const Register = () => {
             line_name: profile.displayName,
             picture: profile.pictureUrl
         }
-        if (formData.cid == '' || formData.tel == '' || Object.keys(profile).length == 0) {
+        if (formData.cid == '' || formData.tel == '' ) {
             setUAlertm('กรุณากรอกข้อมูลให้ครบ')
         } else {
 
             try {
                 let res = await axios.get(`${BASE_URL}/get-hn/${formData.cid}`, { headers: { "token": token } })
+                console.log(res.data)
                 if (res.data.length == 0) {
                     setUAlertm('คุณยังไม่เคยมาโรงพยาบาลกรุณาติดต่อห้องบัตร')
                 } else {
@@ -98,10 +100,10 @@ const Register = () => {
     return (
         <div style={{ textAlign: "center" }}>
                <Head>
-        <title>xxx</title>
+       
       </Head>
             <NavHeader />
-
+{console.log(formData)}
             <div style={{ paddingTop: '20%', textAlign: 'center' }}>
 
                 {isLoading ? <div className='container' style={{ marginTop: 20 }}>
@@ -127,15 +129,16 @@ const Register = () => {
                                             // setIsCode(false)
                                             setFormData({ ...formData, cid: e.target.value })
                                             setUAlertm('')
+                                            
                                         }}
 
-                                        onKeyPress={(event) => {
-                                            if (!/[0-9]/.test(event.key)) {
-                                                event.preventDefault();
-                                                console.log('dd')
-                                                setUAlertm('กรอกเฉพาะตัวเลข')
-                                            }
-                                        }}
+                                        // onKeyPress={(event) => {
+                                        //     if (!/[0-9]/.test(event.key)) {
+                                        //         event.preventDefault();
+                                        //         console.log('dd')
+                                        //         setUAlertm('กรอกเฉพาะตัวเลข')
+                                        //     }
+                                        // }}
                                     />
                                 </div>
                                 <div className="form-group" style={{ marginTop: 30 }}>
