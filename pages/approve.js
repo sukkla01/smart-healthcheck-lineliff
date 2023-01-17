@@ -31,7 +31,7 @@ const ApproveA = () => {
     const [sumMore, setSumMore] = useState(0)
     const [sumTotal, setSumTotal] = useState(0)
 
-    const { dep, dataMainSend, dataMoreSend } = router.query;
+    const { dep, dataMainSend, dataMoreSend ,selectdate } = router.query;
 
     useEffect(() => {
 
@@ -48,10 +48,10 @@ const ApproveA = () => {
             getCid(profile.userId, profile.pictureUrl)
 
         }
-        getCid('xxxx', '')
+        // getCid('xxxx', '')
         // getMore()
         console.log(JSON.parse(dataMainSend))
-        // getData()
+        getData()
         // getPttype()
     }, [])
 
@@ -131,6 +131,28 @@ const ApproveA = () => {
         } catch (error) {
             console.log(error)
         }
+    }
+    const submit = async () => {
+        let data = {
+            dataMainSend :  JSON.parse(dataMainSend),
+            dataMoreSend :  JSON.parse(dataMoreSend),
+            date : selectdate,
+            depsend : dep,
+            profile : profile,
+            hn : hn
+        }
+
+        try {
+            let res = await axios.post(`${BASE_URL}/add-appoint`,data, { headers: { "token": token } })
+            router.push({
+                pathname: 'appoint-success',
+            });
+        
+        } catch (error) {
+            console.log(error)
+        }
+
+
     }
 
     return (
@@ -310,12 +332,7 @@ const ApproveA = () => {
                             </Button>
                         </Col>
                         <Col span={12}>
-                            <Button type={"primary"} block shape="round" size={'large'} style={{ marginLeft: 5 }} onClick={() => {
-                                router.push({
-                                    pathname: '/item',
-                                    query: { dep: dep },
-                                })
-                            }}>
+                            <Button type={"primary"} block shape="round" size={'large'} style={{ marginLeft: 5 }} onClick={() => {submit}} >
                                 ยืนยัน
                             </Button>
                         </Col>

@@ -336,7 +336,7 @@ const Item = () => {
                         <Col span={12}>
                             <Button type={"primary"} block shape="round" size={'large'} style={{ marginLeft: 5 }} onClick={() => {
                                 router.push({
-                                    pathname: '/approve',
+                                    pathname: '/app_date',
                                     query: { dep: dep,dataMainSend : JSON.stringify(dataMainCheck),dataMoreSend :  JSON.stringify(dataMoreCheck)},
                                 })
                             }}>

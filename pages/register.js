@@ -103,7 +103,6 @@ const Register = () => {
        
       </Head>
             <NavHeader />
-{console.log(formData)}
             <div style={{ paddingTop: '20%', textAlign: 'center' }}>
 
                 {isLoading ? <div className='container' style={{ marginTop: 20 }}>

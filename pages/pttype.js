@@ -69,10 +69,10 @@ const Pttype = () => {
 
             } else {
 
-                // router.push({
-                //     pathname: '/register',
-                //     query: { userId: userId },
-                // })
+                router.push({
+                    pathname: '/register',
+                    query: { userId: userId },
+                })
             }
 
 
