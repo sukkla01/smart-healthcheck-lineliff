@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import NavHeader from '../component/NavHeader'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import config from '../config' 
+import config from '../config'
 import * as moment from "moment";
 import "moment/locale/th";
 moment.locale("th");
@@ -30,7 +30,7 @@ const AppDate = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { dep, dataMainSend, dataMoreSend } = router.query;
 
-    
+
 
 
     useEffect(() => {
@@ -98,49 +98,20 @@ const AppDate = () => {
         if (tmp < 0) {
             setSDateShow("ไม่สามารถจองย้อนหลังได้ กรุณาเลือกวันอื่น");
             setIsNext(false);
-        } else if (nextdate == "2022-11-28" && dep == "5") {
-            setIsNext(false);
-            setSDateShow("ไม่เปิดบริการ");
-        } else if (nextdate == "2022-11-22" && dep == "1") {
-            setIsNext(false);
-            setSDateShow("ไม่เปิดบริการ");
-        } else if (daySelectCheck > 0) {
-            try {
-                let res = await axios.get(
-                    `${BASE_URL}/get-dep-limit/${nextdate}/${dep}`,
-                    { headers: { token: token } }
-                );
-                console.log(res.data);
-                if (res.data.length == 0) {
-                    setSDateShow(
-                        moment(value).add(543, "year").format("LL") + " --- จองได้"
-                    );
-                    setDate(moment(value).format("YYYY-MM-DD"));
-                    setIsNext(true);
-                } else {
-                    if (parseInt(res.data[0].tcount) <= res.data[0].max_limit) {
-                        setSDateShow(moment(value).add(543, "year").format("LL"));
-                        setDate(moment(value).format("YYYY-MM-DD"));
-                        setIsNext(true);
-                    } else {
-                        setSDateShow("เต็มแล้ว");
-                        setIsNext(false);
-                    }
-                }
-                // setData(res.data)
-            } catch (error) {
-                console.log(error);
-            }
         } else {
-            setSDateShow("ไม่เปิดบริการ กรุณาเลือกวันอื่น");
-            setIsNext(false);
+            setSDateShow(
+                moment(value).add(543, "year").format("LL") + " --- จองได้"
+            );
+            setDate(nextdate)
+            setIsNext(true);
         }
+
     }
 
     const onBack = () => {
         router.push({
             pathname: "/item",
-            query: { dep: dep},
+            query: { dep: dep },
         });
     };
 
@@ -149,7 +120,7 @@ const AppDate = () => {
         if (IsNext) {
             router.push({
                 pathname: 'approve',
-                query: { dep: dep,dataMainSend : JSON.stringify(dataMainCheck),dataMoreSend :  JSON.stringify(dataMoreCheck),selectdate : date},
+                query: { dep: dep, dataMainSend: JSON.stringify(dataMainCheck), dataMoreSend: JSON.stringify(dataMoreCheck), selectdate: date },
             });
         }
     };
@@ -157,12 +128,12 @@ const AppDate = () => {
         <div>
             <NavHeader />
 
-           
 
-                <div className='container' style={{ paddingTop: '17%' }}>
 
-                    {/* Profile */}
-                    <div style={{ backgroundColor: 'white', height: 110, borderRadius: 15 }}>
+            <div className='container' style={{ paddingTop: '17%' }}>
+
+                {/* Profile */}
+                <div style={{ backgroundColor: 'white', height: 110, borderRadius: 15 }}>
                     <div className='row' style={{ paddingTop: 15, paddingLeft: 10 }}>
                         <div className='col-4'>
                             <img src={Object.keys(profile).length == 0 ? './images/user.gif' : profile.pictureUrl} width={80} height={80} style={{ borderRadius: '50%' }} />
@@ -181,79 +152,79 @@ const AppDate = () => {
                         </div>
                     </div>
                 </div>
-                    {/* Profile */}
+                {/* Profile */}
+            </div>
+
+
+            <h6
+                style={{
+                    color: "black",
+                    paddingTop: 15,
+                    paddingLeft: 20,
+                    paddingRight: 15,
+                }}
+            >
+                เลือกวันที่ต้องการตรวจ {"(" + DataDepName + ")"}
+            </h6>
+
+            <div
+                className="site-calendar-demo-card"
+                style={{ marginLeft: 15, marginRight: 10, borderRadius: 15 }}
+            >
+                <ConfigProvider locale={th_TH}>
+                    <Calendar
+                        fullscreen={false}
+                        onPanelChange={onPanelChange}
+                        onChange={onPanelChange}
+                        locale="th_TH"
+                    />
+                </ConfigProvider>
+            </div>
+
+            <div style={{ marginTop: 15, marginLeft: 15, marginRight: 10 }}>
+                <p style={{ fontSize: 20 }} className="text-center">
+                    <Alert
+                        message={dateShow}
+                        type={!IsNext ? "error" : "success"}
+                        showIcon
+                    />
+                </p>
+            </div>
+
+            <div
+                className="row"
+                style={{
+                    marginTop: 30,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    marginBottom: 200,
+                }}
+            >
+                <div className="col-6" style={{ marginBottom: 100 }}>
+                    <Button
+                        type={"default"}
+                        shape="round"
+                        block
+                        size={"large"}
+                        onClick={onBack}
+                    >
+                        กลับ
+                    </Button>
                 </div>
-
-
-                <h6
-                    style={{
-                        color: "black",
-                        paddingTop: 15,
-                        paddingLeft: 20,
-                        paddingRight: 15,
-                    }}
-                >
-                    เลือกวันที่ต้องการตรวจ {"(" + DataDepName + ")"}
-                </h6>
-
-                <div
-                    className="site-calendar-demo-card"
-                    style={{ marginLeft: 15, marginRight: 10, borderRadius: 15 }}
-                >
-                    <ConfigProvider locale={th_TH}>
-                        <Calendar
-                            fullscreen={false}
-                            onPanelChange={onPanelChange}
-                            onChange={onPanelChange}
-                            locale="th_TH"
-                        />
-                    </ConfigProvider>
-                </div>
-
-                {/* <div style={{ marginTop: 15, marginLeft: 15, marginRight: 10 }}>
-                    <p style={{ fontSize: 20 }} className="text-center">
-                        <Alert
-                            message={dateShow}
-                            type={!IsNext ? "error" : "success"}
-                            showIcon
-                        />
-                    </p>
-                </div> */}
-
-                <div
-                    className="row"
-                    style={{
-                        marginTop: 30,
-                        marginLeft: 10,
-                        marginRight: 10,
-                        marginBottom: 200,
-                    }}
-                >
-                    <div className="col-6" style={{ marginBottom: 100 }}>
-                        <Button
-                            type={"default"}
-                            shape="round"
-                            block
-                            size={"large"}
-                            onClick={onBack}
-                        >
-                            กลับ
-                        </Button>
-                    </div>
-                    <div className="col-6">
-                        <Button
-                            type={"primary"}
-                            shape="round"
-                            block
-                            size={"large"}
-                            onClick={onNext}
-                        >
-                            ถัดไป
-                        </Button>
-                    </div>
+                <div className="col-6">
+                    <Button
+                        type={"primary"}
+                        shape="round"
+                        block
+                        size={"large"}
+                        onClick={onNext}
+                    >
+                        ถัดไป
+                    </Button>
                 </div>
             </div>
-        
+        </div>
+
     )
 }
 
