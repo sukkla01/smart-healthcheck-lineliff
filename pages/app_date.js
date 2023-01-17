@@ -88,17 +88,23 @@ const AppDate = () => {
         let day = d.getDay();
         let nextdate = moment(value).format("YYYY-MM-DD");
 
-        let daySelectCheck = tday.find((id) => id === day.toString());
+        console.log(nextdate)
+        console.log(day)
+
+        // let daySelectCheck = tday.find((id) => id === day.toString());
         // date diff
         let start = moment(value, "YYYY-MM-DD");
         let end = moment(moment(now_).format("YYYY-MM-DD"), "YYYY-MM-DD");
 
         let tmp = moment.duration(start.diff(end)).asDays();
-
+console.log(tmp)
         if (tmp < 0) {
             setSDateShow("ไม่สามารถจองย้อนหลังได้ กรุณาเลือกวันอื่น");
             setIsNext(false);
-        } else {
+        } else if(day == 0 || day == 6){
+            setSDateShow("ไม่สามารถจองวันหยุดเสาร์-อาทิตย์  ได้");
+            setIsNext(false);
+        }  else {
             setSDateShow(
                 moment(value).add(543, "year").format("LL") + " --- จองได้"
             );
@@ -120,7 +126,7 @@ const AppDate = () => {
         if (IsNext) {
             router.push({
                 pathname: 'approve',
-                query: { dep: dep, dataMainSend: JSON.stringify(dataMainCheck), dataMoreSend: JSON.stringify(dataMoreCheck), selectdate: date },
+                query: { dep: dep, dataMainSend: JSON.stringify(dataMainSend), dataMoreSend: JSON.stringify(dataMoreSend), selectdate: date },
             });
         }
     };
