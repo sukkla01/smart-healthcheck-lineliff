@@ -17,7 +17,7 @@ const token = config.token
 const AppDate = () => {
     const router = useRouter();
     // const { dep, profile, tname, hn_ } = router.query;
-    const [dateShow, setSDateShow] = useState("");
+    const [dateShow, setSDateShow] = useState("ไม่สามารถเลือกวันปัจจุบันได้");
     const [date, setDate] = useState("");
     const [hn, setHn] = useState("");
     const [IsNext, setIsNext] = useState(false);
