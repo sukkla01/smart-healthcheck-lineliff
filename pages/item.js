@@ -52,8 +52,12 @@ const Item = () => {
         }
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
 
-        getMore()
+        // getMore()
         getData()
+
+        if(dataMain.length > 0 && dataMore.length > 0){
+           
+        }
         // getPttype()
     }, [])
 
@@ -66,7 +70,6 @@ const Item = () => {
                 setTage(res.data[0].tage)
                 getMain(res.data[0].tage)
                 localStorage.setItem('tname', res.data[0].tname);
-                setIsLoading(false)
 
             } else {
 
@@ -109,6 +112,7 @@ const Item = () => {
             setSumMain(tsum)
             setDataMainCheck(tmp)
             setSumTotal(tsum)
+            getMore()
 
         } catch (error) {
             console.log(error)
@@ -119,6 +123,8 @@ const Item = () => {
         try {
             let res = await axios.get(`${BASE_URL}/get-item-more`, { headers: { "token": token } })
             setDataMore(res.data)
+            setIsLoading(false)
+
         } catch (error) {
             console.log(error)
         }

@@ -81,7 +81,6 @@ const ApproveA = () => {
                 getMain(res.data[0].tage)
                 getMore()
                 localStorage.setItem('tname', res.data[0].tname);
-                setIsLoading(false)
 
             } else {
 
@@ -153,6 +152,7 @@ const ApproveA = () => {
             setDataMoreCheck(tmp_data)
             setSumMore(tmp_price)
             setSumTotal(tmp_price + val)
+            setIsLoading(false)
 
 
         } catch (error) {
