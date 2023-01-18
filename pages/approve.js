@@ -24,7 +24,7 @@ const ApproveA = () => {
     const [tage, setTage] = useState('')
     const [depName, setDepName] = useState('')
     const [tname, setTname] = useState('')
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [dataMain, setDataMain] = useState([])
     const [dataMainCheck, setDataMainCheck] = useState([])
     const [dataMore, setDataMore] = useState([])
