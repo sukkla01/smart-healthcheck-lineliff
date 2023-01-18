@@ -130,7 +130,7 @@ const HistoryAppoint = () => {
 
                     data.map((item, i) => {
                         return <div style={{ backgroundColor: 'white', height: 60, borderRadius: 15, marginBottom: 10 }} key={i} onClick={
-                           ()=>  router.push({
+                            () => router.push({
                                 pathname: '/history-detail',
                                 query: { no: item.no },
                             })
@@ -139,7 +139,7 @@ const HistoryAppoint = () => {
                                 <div className='col-1'></div>
                                 <div className='col-9'>
                                     <div className='row' style={{ fontSize: 15, }}>
-                                        วันที่จอง : { moment(item.nextdate).format('LL')   }
+                                        วันที่จอง : {moment(item.nextdate).format('LL')}
                                     </div>
                                 </div>
                                 <div className='col-2' style={{ textAlign: 'left' }}>
