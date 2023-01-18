@@ -112,14 +112,15 @@ const AppDate = () => {
         let end = moment(moment(now_).format("YYYY-MM-DD"), "YYYY-MM-DD");
 
         let tmp = moment.duration(start.diff(end)).asDays();
-console.log(tmp)
         if (tmp < 0) {
             setSDateShow("ไม่สามารถจองย้อนหลังได้ กรุณาเลือกวันอื่น");
             setIsNext(false);
-        } else if(day == 0 || day == 6){
+        } else if (day == 0 || day == 6) {
             setSDateShow("ไม่สามารถจองวันหยุดเสาร์-อาทิตย์  ได้");
             setIsNext(false);
-        }  else {
+        } else if (tmp == 0) {
+            setSDateShow("ไม่สามารถเลือกวันปัจจุบันได้");
+        } else {
             setSDateShow(
                 moment(value).add(543, "year").format("LL") + " --- จองได้"
             );
@@ -141,7 +142,7 @@ console.log(tmp)
         if (IsNext) {
             router.push({
                 pathname: 'approve',
-                query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend:  dataMoreSend, selectdate: date },
+                query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend: dataMoreSend, selectdate: date },
             });
         }
     };

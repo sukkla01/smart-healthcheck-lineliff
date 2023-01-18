@@ -31,6 +31,7 @@ const Item = () => {
     const [sumMain, setSumMain] = useState(0)
     const [sumMore, setSumMore] = useState(0)
     const [sumTotal, setSumTotal] = useState(0)
+    const [depName, setDepName] = useState('')
 
 
     const { dep } = router.query;
@@ -58,8 +59,21 @@ const Item = () => {
         if(dataMain.length > 0 && dataMore.length > 0){
            
         }
-        // getPttype()
+        getPttype()
     }, [])
+
+    const getPttype = async (userId) => {
+        try {
+            let res = await axios.get(`${BASE_URL}/get-pttype`, { headers: { "token": token } })
+            if (res.data.length > 0) {
+                const r = res.data.filter((e) => e.id == dep)
+                setDepName(r[0].name)
+
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const getCid = async (userId, pictureUrl) => {
         try {
@@ -189,7 +203,7 @@ const Item = () => {
                 </div>
                 {/* Profile */}
 
-                <h6 style={{ color: 'black', paddingTop: 25 }}>เลือกรายการที่ต้องการตรวจ</h6>
+                <h6 style={{ color: 'black', paddingTop: 25 }}>เลือกรายการที่ต้องการตรวจ {"(" + depName + ")"}</h6>
 
                 {isLoading ? <div className='text-center'> <Section><ReactLoading type='bubbles' color='#AAAAAA' height={'20%'} width={'20%'} /></Section></div> :
 
