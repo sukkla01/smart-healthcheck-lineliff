@@ -8,18 +8,17 @@ import config from '../config'
 import ReactLoading from 'react-loading';
 import styled from "tachyons-components";
 import Head from 'next/head'
+import * as moment from "moment";
+import "moment/locale/th";
+moment.locale("th");
 
 const BASE_URL = config.BASE_URL
 const token = config.token
-
 export const Section = styled('div')`
 flex flex-wrap content-center justify-center w-100 h-100`;
-
-const Pttype = () => {
+const HistoryAppoint = () => {
     const router = useRouter()
     const [profile, setProfile] = useState({})
-    const [test, setTest] = useState({ 'ss': 11 })
-    const [selectId, setSelectId] = useState(0)
     const [hn, setHn] = useState('')
     const [tage, setTage] = useState('')
     const [tname, setTname] = useState('')
@@ -41,10 +40,11 @@ const Pttype = () => {
 
             getCid(profile.userId, profile.pictureUrl)
 
+
         }
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
         getData()
-        getPttype()
+        // getPttype()
     }, [])
 
     const getCid = async (userId, pictureUrl) => {
@@ -56,16 +56,9 @@ const Pttype = () => {
                 setTname(res.data[0].tname)
                 setTage(res.data[0].tage)
                 localStorage.setItem('tname', res.data[0].tname);
+                getHistoryAddAppoint(res.data[0].hn)
 
-                // if(profile.pictureUrl != res.data[0].picture){
-                //     let data = {
-                //       picture : pictureUrl,
-                //       userId :userId
-                //     }
-                //    await axios.post(`${BASE_URL}/update-register-picture`,data, { headers: { "token": token } })
-                // }
 
-                setIsLoading(false)
 
             } else {
 
@@ -83,29 +76,22 @@ const Pttype = () => {
         }
     }
 
-    const getPttype = async (userId) => {
+    const getHistoryAddAppoint = async (hn) => {
+        console.log(hn)
         try {
-            let res = await axios.get(`${BASE_URL}/get-pttype`, { headers: { "token": token } })
+            let res = await axios.get(`${BASE_URL}/get-history-appoint/${hn}`, { headers: { "token": token } })
             console.log(res.data)
             if (res.data.length > 0) {
                 setData(res.data)
 
+
             }
+
+            setIsLoading(false)
+
         } catch (error) {
             console.log(error)
         }
-    }
-
-    const onDep = (value) => {
-
-        if (selectId != 0) {
-            router.push({
-                pathname: '/item',
-                query: { dep: selectId },
-            })
-        }
-
-
     }
     return (
         <div>
@@ -114,7 +100,6 @@ const Pttype = () => {
             </Head>
             <NavHeader />
             <div className='container' style={{ paddingTop: '17%' }}>
-
                 {/* Profile */}
                 <div style={{ backgroundColor: 'white', height: 110, borderRadius: 15 }}>
                     <div className='row' style={{ paddingTop: 15, paddingLeft: 10 }}>
@@ -137,44 +122,45 @@ const Pttype = () => {
                 </div>
                 {/* Profile */}
 
-
-                <h6 style={{ color: 'black', paddingTop: 25 }}>เลือกสิทธิการตรวจ</h6>
+                <h6 style={{ color: 'black', paddingTop: 25 }}>ประวัติการจอง</h6>
 
                 {isLoading ? <div className='text-center'> <Section><ReactLoading type='bubbles' color='#AAAAAA' height={'20%'} width={'20%'} /></Section></div> :
 
 
-                    <div className='row' >
 
-                        {data.map((item, i) => {
-                            return <div className='col-6 mt-2' key={i} >
-                                <div onClick={() => setSelectId(item.id)} className='text-center' style={{ backgroundColor: 'white', height: 100, borderRadius: 15, borderColor: selectId == item.id ? '#00bfa5' : 'white', borderWidth: 1, borderStyle: 'solid' }}>
-                                    {/* <div className='row'> */}
-                                    <img src={'./images/hos.gif'} width={40} height={40} style={{ marginTop: 10 }} />
-                                    <p style={{ paddingTop: 0, fontSize: 16 }}>{item.name}</p>
-                                    {/* </div> */}
+                    data.map((item, i) => {
+                        return <div style={{ backgroundColor: 'white', height: 60, borderRadius: 15, marginBottom: 10 }} key={i} onClick={
+                           ()=>  router.push({
+                                pathname: '/history-detail',
+                                query: { no: item.no },
+                            })
+                        }>
+                            <div className='row' style={{ paddingTop: 15, paddingLeft: 10 }}>
+                                <div className='col-1'></div>
+                                <div className='col-9'>
+                                    <div className='row' style={{ fontSize: 15, }}>
+                                        วันที่จอง : { moment(item.nextdate).format('LL')   }
+                                    </div>
+                                </div>
+                                <div className='col-2' style={{ textAlign: 'left' }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                                    </svg>
                                 </div>
                             </div>
-                        })}
+                        </div>
+                    })
 
-                    </div>
+
 
                 }
-                {/* <div className="card green" style={{ marginTop: 50 }} onClick={() => onDep(1)}>
-          <h1>แพทย์แผนไทย</h1>
-        </div>
-        <div className="card purple" style={{ marginTop: 50 }} onClick={() => onDep(2)}>
-          <h1>ทันตกรรม</h1>
-        </div> */}
-            </div>
-            {isLoading ? '' :
-                <div style={{ marginTop: 30, marginLeft: 20, marginRight: 20, marginBottom: 100 }} >
-                    <Button type={selectId != 0 ? "primary" : "default"} shape="round" block size={'large'} onClick={onDep} >
-                        ถัดไป
-                    </Button>
-                </div>}
 
+
+            </div>
         </div>
+
+
     )
 }
 
-export default Pttype
+export default HistoryAppoint
