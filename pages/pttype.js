@@ -42,7 +42,7 @@ const Pttype = () => {
             getCid(profile.userId, profile.pictureUrl)
 
         }
-        // getCid('xxxx', '')
+        // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
         getData()
         getPttype()
     }, [])

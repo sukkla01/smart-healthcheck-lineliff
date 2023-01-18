@@ -50,6 +50,7 @@ const AppDate = () => {
 
         }
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
+
         getData()
         // getPttype()
     }, [])
@@ -57,7 +58,6 @@ const AppDate = () => {
     const getCid = async (userId, pictureUrl) => {
         try {
             let res = await axios.get(`${BASE_URL}/get-register-cid/${userId}`, { headers: { "token": token } })
-            console.log(res.data)
             if (res.data.length > 0) {
                 setHn(res.data[0].hn)
                 setTname(res.data[0].tname)
@@ -126,7 +126,7 @@ console.log(tmp)
         if (IsNext) {
             router.push({
                 pathname: 'approve',
-                query: { dep: dep, dataMainSend: JSON.stringify(dataMainSend), dataMoreSend: JSON.stringify(dataMoreSend), selectdate: date },
+                query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend:  dataMoreSend, selectdate: date },
             });
         }
     };

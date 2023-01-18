@@ -50,7 +50,8 @@ const Item = () => {
             getCid(profile.userId, profile.pictureUrl)
 
         }
-        // getCid('xxxx', '')
+        // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
+
         getMore()
         getData()
         // getPttype()
@@ -335,9 +336,10 @@ const Item = () => {
                         </Col>
                         <Col span={12}>
                             <Button type={"primary"} block shape="round" size={'large'} style={{ marginLeft: 5 }} onClick={() => {
+                                console.log(dataMoreCheck)
                                 router.push({
                                     pathname: '/app_date',
-                                    query: { dep: dep,dataMainSend : JSON.stringify(dataMainCheck),dataMoreSend :  JSON.stringify(dataMoreCheck)},
+                                    query: { dep: dep,dataMainSend : dataMainCheck, dataMoreSend : dataMoreCheck},
                                 })
                             }}>
                                 ถัดไป

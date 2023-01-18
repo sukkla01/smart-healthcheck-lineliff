@@ -7,7 +7,9 @@ import axios from 'axios'
 import config from '../config'
 import ReactLoading from 'react-loading';
 import styled from "tachyons-components";
-
+import * as moment from "moment";
+import "moment/locale/th";
+moment.locale("th");
 
 const BASE_URL = config.BASE_URL
 const token = config.token
@@ -20,6 +22,7 @@ const ApproveA = () => {
     const [profile, setProfile] = useState({})
     const [hn, setHn] = useState('')
     const [tage, setTage] = useState('')
+    const [depName, setDepName] = useState('')
     const [tname, setTname] = useState('')
     const [isLoading, setIsLoading] = useState(false);
     const [dataMain, setDataMain] = useState([])
@@ -48,13 +51,25 @@ const ApproveA = () => {
             getCid(profile.userId, profile.pictureUrl)
 
         }
-        // getCid('xxxx', '')
+        // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
         // getMore()
-        console.log(JSON.parse(dataMainSend))
         getData()
-        // getPttype()
+        getPttype()
     }, [])
 
+
+    const getPttype = async (userId) => {
+        try {
+            let res = await axios.get(`${BASE_URL}/get-pttype`, { headers: { "token": token } })
+            if (res.data.length > 0) {
+                const r = res.data.filter((e) => e.id == dep)
+                setDepName(r[0].name)
+
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const getCid = async (userId, pictureUrl) => {
         try {
@@ -92,13 +107,14 @@ const ApproveA = () => {
             let tmp = []
             let tmp_price = 0
             let tmp_data = []
-            JSON.parse(dataMainSend).map((val, i) => {
+            // let d = dataMainSend.split(',')
+            // console.log(dataMainSend)
+
+            dataMainSend.map((val, i) => {
                 const result = res.data.filter((e) => e.id == val)
-                console.log(result)
                 tmp_price = tmp_price + parseInt(result[0].price)
                 tmp_data.push(result[0])
             })
-            console.log(tmp_data)
             setDataMainCheck(tmp_data)
             setSumMain(tmp_price)
             getMore(tmp_price)
@@ -108,6 +124,7 @@ const ApproveA = () => {
 
         } catch (error) {
             console.log(error)
+            
         }
     }
 
@@ -117,9 +134,19 @@ const ApproveA = () => {
             setDataMore(res.data)
             let tmp_price = 0
             let tmp_data = []
-            JSON.parse(dataMoreSend).map((val, i) => {
+            let tmp_dataMoreSend = []
+            // let d = JSON.parse(dataMoreSend).split(',')
+            if(typeof(dataMoreSend) == 'string'){
+                let d = dataMoreSend.split(',')
+                // tmp_dataMoreSend = dataMoreSend === '' ? [] : dataMoreSend
+                tmp_dataMoreSend =  dataMoreSend === '' ? [] : dataMoreSend.split(',')
+            }else{
+                tmp_dataMoreSend = dataMoreSend
+            }
+            
+
+            tmp_dataMoreSend.map((val, i) => {
                 const result = res.data.filter((e) => e.id == val)
-                console.log(result)
                 tmp_price = tmp_price + parseInt(result[0].price)
                 tmp_data.push(result[0])
             })
@@ -133,9 +160,11 @@ const ApproveA = () => {
         }
     }
     const submit = async () => {
+        console.log(dataMainSend)
+        console.log(dataMoreSend)
         let data = {
-            dataMainSend :  JSON.parse(dataMainSend),
-            dataMoreSend :  JSON.parse(dataMoreSend),
+            dataMainSend :  dataMainSend,
+            dataMoreSend :  dataMoreSend,
             date : selectdate,
             depsend : dep,
             profile : profile,
@@ -182,6 +211,23 @@ const ApproveA = () => {
                     </div>
                 </div>
                 {/* Profile */}
+                {/* detail */}
+                <div style={{ backgroundColor: 'white', height: 90, borderRadius: 15,marginTop : 10 }}>
+                    <div className='row' style={{ paddingTop: 15, paddingLeft: 10 }}>
+                        <div className='col-1'>
+
+                        </div>
+                        <div className='col-11'>
+                            <div className='row' style={{ fontSize: 15 }}>
+                                สิทธิ : {depName}
+                            </div>
+                            <div className='row' style={{ fontSize: 15, paddingTop: 8 }}>
+                                วันที่จอง  : { moment(selectdate).format('LL').replace('2023','2566')   }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* detail */}
 
                 {isLoading ? <div className='text-center'>
                     <Section>
@@ -189,7 +235,7 @@ const ApproveA = () => {
 
                     <div className='row' >
 
-                        <Card style={{ marginLeft: 10, width: '95%', marginTop: 20 }}>
+                        <Card style={{ marginLeft: 10, width: '95%', marginTop: 15 }}>
                             <Row>
                                 <Col span={24} style={{ marginBottom: 10, marginTop: -15 }}>
                                     <div style={{ fontSize: 16, fontWeight: 'bold' }}>รายการตรวจหลัก</div>
@@ -324,15 +370,15 @@ const ApproveA = () => {
                         <Col span={12}>
                             <Button type={"default"} block shape="round" size={'large'} style={{ marginRight: 5 }} onClick={() => {
                                 router.push({
-                                    pathname: '/item',
-                                    query: { dep: dep },
+                                    pathname: '/app_date',
+                                    query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend: dataMoreSend },
                                 })
                             }} >
                                 กลับ
                             </Button>
                         </Col>
                         <Col span={12}>
-                            <Button type={"primary"} block shape="round" size={'large'} style={{ marginLeft: 5 }} onClick={() => {submit}} >
+                            <Button type={"primary"} block shape="round" size={'large'} style={{ marginLeft: 5 }} onClick={submit} >
                                 ยืนยัน
                             </Button>
                         </Col>
