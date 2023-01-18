@@ -29,6 +29,7 @@ const AppDate = () => {
     const [tname, setTname] = useState('')
     const [isLoading, setIsLoading] = useState(true);
     const { dep, dataMainSend, dataMoreSend } = router.query;
+    const [depName, setDepName] = useState('')
 
 
 
@@ -52,8 +53,22 @@ const AppDate = () => {
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
 
         getData()
-        // getPttype()
+        getPttype()
     }, [])
+
+
+    const getPttype = async (userId) => {
+        try {
+            let res = await axios.get(`${BASE_URL}/get-pttype`, { headers: { "token": token } })
+            if (res.data.length > 0) {
+                const r = res.data.filter((e) => e.id == dep)
+                setDepName(r[0].name)
+
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const getCid = async (userId, pictureUrl) => {
         try {
@@ -170,7 +185,7 @@ console.log(tmp)
                     paddingRight: 15,
                 }}
             >
-                เลือกวันที่ต้องการตรวจ {"(" + DataDepName + ")"}
+                เลือกวันที่ต้องการตรวจ {"(" + depName + ")"}
             </h6>
 
             <div
