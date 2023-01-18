@@ -162,7 +162,7 @@ const HistoryDetail = () => {
                         </div>
                         <div className='col-11'>
                             <div className='row' style={{ fontSize: 15 }}>
-                                สิทธิ : {dataMain.length > 0 ? dataMain[0].ptname : ''}
+                                สิทธิ : {dataMain.length > 0 ? dataMain[0].ptname : ''}   
                             </div>
                             <div className='row' style={{ fontSize: 15, paddingTop: 8 }}>
                                 วันที่จอง  : { moment(dataMain.length > 0 ? dataMain[0].nextdate : '2000-00-01').format('LL').replace('2023','2566')   }
