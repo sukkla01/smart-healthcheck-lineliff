@@ -99,9 +99,7 @@ const Register = () => {
 
     return (
         <div style={{ textAlign: "center" }}>
-               <Head>
-       
-      </Head>
+             
             <NavHeader />
             <div style={{ paddingTop: '20%', textAlign: 'center' }}>
 

@@ -95,9 +95,9 @@ const HistoryAppoint = () => {
     }
     return (
         <div>
-            <Head>
+            {/* <Head>
                 <title>สิทธิ</title>
-            </Head>
+            </Head> */}
             <NavHeader />
             <div className='container' style={{ paddingTop: '17%' }}>
                 {/* Profile */}

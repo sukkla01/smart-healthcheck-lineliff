@@ -96,9 +96,9 @@ const HistoryResult = () => {
 
     return (
         <div>
-            <Head>
+            {/* <Head>
                 <title>ประวัติการตรวจ</title>
-            </Head>
+            </Head> */}
             <NavHeader />
             <div className='container' style={{ paddingTop: '17%' }}>
                 {/* Profile */}
