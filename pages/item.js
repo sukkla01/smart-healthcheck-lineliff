@@ -56,8 +56,8 @@ const Item = () => {
         // getMore()
         getData()
 
-        if(dataMain.length > 0 && dataMore.length > 0){
-           
+        if (dataMain.length > 0 && dataMore.length > 0) {
+
         }
         getPttype()
     }, [])
@@ -266,59 +266,62 @@ const Item = () => {
 
                             </Row>
                         </Card>
-                        <Card style={{ marginLeft: 10, width: '95%', marginTop: 10 }}>
-                            <Row>
-                                <Col span={24} style={{ marginBottom: 10, marginTop: -15 }}>
-                                    <div style={{ fontSize: 16, fontWeight: 'bold' }}>รายการตรวจเพิ่มเติม</div>
-
-                                </Col>
-
-                            </Row>
-
-                            <Row>
-                                <Col span={20} style={{ marginBottom: 3 }}>
-                                    {/* <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-                                        
-                                    </Checkbox> */}
-                                    <b> รายการ</b>
-
-                                </Col>
-                                <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
-                                    <b>ราคา</b>
-                                </Col>
-
-                            </Row>
-                            <hr style={{ marginTop: 0, marginBottom: 8 }} />
-                            <Checkbox.Group style={{ width: '100%' }} onChange={onChangeMore} >
+                        {dep != 3 ?
+                            <Card style={{ marginLeft: 10, width: '95%', marginTop: 10 }}>
                                 <Row>
-                                    {dataMore.map((item, i) => {
+                                    <Col span={24} style={{ marginBottom: 10, marginTop: -15 }}>
+                                        <div style={{ fontSize: 16, fontWeight: 'bold' }}>รายการตรวจเพิ่มเติม</div>
 
-                                        return < >
-                                            <Col span={20} style={{ marginBottom: 3 }} >
-                                                <Checkbox value={item.id}>{item.name}</Checkbox>
-                                            </Col>
-                                            <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
-                                                {item.price}
-                                            </Col>
-                                        </>
-                                    })}
+                                    </Col>
 
                                 </Row>
-                            </Checkbox.Group>
-                            <hr />
-                            <Row>
-                                <Col span={20} style={{ marginBottom: 3 }}>
 
-                                    <b> รวมค่าใช้จ่ายเพิ่มเติม (บาท)</b>
+                                <Row>
+                                    <Col span={20} style={{ marginBottom: 3 }}>
+                                        {/* <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
+                                        
+                                    </Checkbox> */}
+                                        <b> รายการ</b>
+
+                                    </Col>
+                                    <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
+                                        <b>ราคา</b>
+                                    </Col>
+
+                                </Row>
+                                <hr style={{ marginTop: 0, marginBottom: 8 }} />
+                                <Checkbox.Group style={{ width: '100%' }} onChange={onChangeMore} >
+                                    <Row>
+                                        {dataMore.map((item, i) => {
+
+                                            return < >
+                                                <Col span={20} style={{ marginBottom: 3 }} >
+                                                    <Checkbox value={item.id}>{item.name}</Checkbox>
+                                                </Col>
+                                                <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
+                                                    {item.price}
+                                                </Col>
+                                            </>
+                                        })}
+
+                                    </Row>
+                                </Checkbox.Group>
+                                <hr />
+                                <Row>
+                                    <Col span={20} style={{ marginBottom: 3 }}>
+
+                                        <b> รวมค่าใช้จ่ายเพิ่มเติม (บาท)</b>
 
 
-                                </Col>
-                                <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
-                                    <b>{sumMore}</b>
-                                </Col>
+                                    </Col>
+                                    <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
+                                        <b>{sumMore}</b>
+                                    </Col>
 
-                            </Row>
-                        </Card>
+                                </Row>
+                            </Card> : ''}
+
+
 
                         <Card style={{ marginLeft: 10, width: '95%', marginTop: 10 }}>
                             <Row>
@@ -359,7 +362,7 @@ const Item = () => {
                                 console.log(dataMoreCheck)
                                 router.push({
                                     pathname: '/app_date',
-                                    query: { dep: dep,dataMainSend : dataMainCheck, dataMoreSend : dataMoreCheck},
+                                    query: { dep: dep, dataMainSend: dataMainCheck, dataMoreSend: dataMoreCheck },
                                 })
                             }}>
                                 ถัดไป
