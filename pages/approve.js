@@ -129,7 +129,7 @@ const ApproveA = () => {
 
     const getMore = async (val) => {
         try {
-            let res = await axios.get(`${BASE_URL}/get-item-more`, { headers: { "token": token } })
+            let res = await axios.get(`${BASE_URL}/get-item-more/${dep}`, { headers: { "token": token } })
             setDataMore(res.data)
             let tmp_price = 0
             let tmp_data = []
