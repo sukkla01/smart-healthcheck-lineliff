@@ -135,7 +135,7 @@ const Item = () => {
 
     const getMore = async (age) => {
         try {
-            let res = await axios.get(`${BASE_URL}/get-item-more`, { headers: { "token": token } })
+            let res = await axios.get(`${BASE_URL}/get-item-more/${dep}`, { headers: { "token": token } })
             setDataMore(res.data)
             setIsLoading(false)
 
