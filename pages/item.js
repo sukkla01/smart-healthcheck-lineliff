@@ -239,7 +239,7 @@ const Item = () => {
 
                                             return < >
                                                 <Col span={20} style={{ marginBottom: 3 }} >
-                                                    <Checkbox value={item.id}>{item.name}</Checkbox>
+                                                    <Checkbox value={item.id}  disabled = { dep == 3 ? true : false}>{item.name}</Checkbox>
                                                 </Col>
                                                 <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
                                                     {item.price}
