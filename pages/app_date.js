@@ -120,12 +120,17 @@ const AppDate = () => {
             setIsNext(false);
         } else if (tmp == 0) {
             setSDateShow("ไม่สามารถเลือกวันปัจจุบันได้");
-        } else {
+            setIsNext(false);
+        } else if (day == 2 || day == 4) {
             setSDateShow(
-                moment(value).add(543, "year").format("LL") + " --- จองได้"
+                moment(value).add(543, "year").format("LL") + " ---> จองได้"
             );
             setDate(nextdate)
             setIsNext(true);
+
+        } else {
+            setSDateShow("ไม่เปิดการจองตรวจ");
+            setIsNext(false);
         }
 
     }
@@ -177,6 +182,15 @@ const AppDate = () => {
                 {/* Profile */}
             </div>
 
+            <div style={{ marginTop: 15, marginLeft: 15, marginRight: 10 }}>
+                <p style={{ fontSize: 20 }} className="text-center">
+                    <Alert
+                        message={'เปิดการจองเฉพาะวันอังคาร กับ พฤหัส'}
+                        type={"info"}
+                        showIcon
+                    />
+                </p>
+            </div>
 
             <h6
                 style={{
