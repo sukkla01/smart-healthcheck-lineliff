@@ -117,7 +117,7 @@ const PrintAppoint = () => {
                     </div>
 
                     {dataMain.map((item, i) => {
-                        return <div className="container" style={{ marginTop: 2 }}>
+                        return <div className="container" style={{ marginTop: 2 }} key={i}>
                             <span style={{ fontSize: 15 }}>{i + 1}.{' '+ item.iname}</span>
                         </div>
                     })}
@@ -127,7 +127,7 @@ const PrintAppoint = () => {
                     </div>
 
                     {dataMore.map((item, i) => {
-                        return <div className="container" style={{ marginTop: 2 }}>
+                        return <div className="container" style={{ marginTop: 2 }} key={i}>
                             <span style={{ fontSize: 15 }}>{i + 1}.{' '+ item.iname}</span>
                         </div>
                     })}
