@@ -81,7 +81,7 @@ const PrintAppoint = () => {
 
 
     return (
-        <div style={{ textAlign: 'left', fontFamily: 'Sarabun', marginTop: 10 }} className='container' >
+        <div style={{ fontFamily: 'Sarabun', marginTop: 10, width: '100%' }}   >
             <div className="bordernn" style={{ backgroundColor: 'white', width: '100%', height: 750, borderColor: 'black' }}>
                 <div style={{ marginLeft: 20, marginRight: 2, marginTop: 10 }}>
                     <div className="container" style={{ paddingTop: 20 }}>
