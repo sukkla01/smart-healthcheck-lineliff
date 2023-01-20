@@ -84,7 +84,52 @@ const PrintAppoint = () => {
         <div style={{ fontFamily: 'Sarabun', marginTop: 10, width: '100%' }}   >
             <div   style={{ backgroundColor: 'white', width: '100%', height: 750 }}>
                 {/* <div style={{ marginLeft: 20, marginRight: 2, marginTop: 10 }}> */}
-                   
+                    <div  style={{ paddingTop: 20 }}>
+                        <span style={{ fontSize: 17, fontWeight: 'bold' }}> บัตรนัดตรวจโรค โรงพยาบาลศรีสังวรสุโขทัย</span> <span style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 80 }}> </span>
+                    </div>
+                    <div  style={{ marginTop: 7, marginBottom: 10 }}>
+                        <span style={{ fontSize: 15, fontWeight: 'bold' }}>  คลินิก : อาชีวเวชกรรม </span>
+                    </div>
+                    <hr style={{ marginTop: 10, border: '1px solid  ' }} />
+                    <div  style={{ marginTop: 10 }}>
+                        <span style={{ fontSize: 15, fontWeight: 'bold' }}>ชื่อ </span> <span style={{ fontSize: 14 }}>   {dataHeader != undefined ? dataHeader.tname : ''} </span>  <span style={{ fontSize: 14, marginLeft: 100 }}> อายุ  {dataHeader != undefined ? dataHeader.tage : ''} ปี   </span>
+                    </div>
+                    <div  style={{ marginTop: 5 }}>
+                        <span style={{ fontSize: 15, fontWeight: 'bold' }}>HN</span><span style={{ fontSize: 14 }}>   {dataHeader != undefined ? dataHeader.hn : ''} </span>
+                    </div>
+                    <div  style={{ marginTop: 5 }}>
+                        <span style={{ fontSize: 14, marginLeft: 0 }}><b>สิทธิการรักษา</b>   </span><span style={{ fontSize: 14, marginLeft: 0 }}>   {dataHeader != undefined ? dataHeader.ptname : ''}  </span>
+                    </div>
+                    <div  style={{ marginTop: 5 }}>
+                        <span style={{ fontSize: 14, fontWeight: 'bold' }}> วันที่นัด   {moment(dataHeader != undefined ? dataHeader.nextdate : '2022-01-01').format('LL')} </span>
+                        {/* <span style={{ fontSize: 14, marginLeft: 130, fontWeight: 'bold' }}> เวลานัด  {moment(dataHeader != undefined ? dataHeader.nextdate : '00:00', "HH:mm").format("hh:mm")}-{moment(dataHeader != undefined ? dataHeader.endtime : '00:00', "HH:mm").format("hh:mm")} </span> */}
+                    </div>
+                    <div  style={{ marginTop: 5 }}>
+                        <span style={{ fontSize: 15 }}> <b>เหตุผลการนัด</b>   </span> <span style={{ fontSize: 15 }}>   ลงจองผ่าน Line</span>
+                    </div>
+
+                    <hr style={{ marginTop: 10, border: '1px dashed  ' }} />
+                    <div  style={{ marginTop: 5 }}>
+                        <span style={{ fontSize: 15, fontWeight: 'bold' }}><u>รายการตรวจ</u></span>
+                    </div>
+
+                    {dataMain.map((item, i) => {
+                        return <div  style={{ marginTop: 2 }} key={i}>
+                            <span style={{ fontSize: 15 }}>{i + 1}.{' '+ item.iname}</span>
+                        </div>
+                    })}
+
+                    <div  style={{ marginTop: 5 }}>
+                        <span style={{ fontSize: 15, fontWeight: 'bold' }}><u>ตรวจเพิ่ม</u></span>
+                    </div>
+
+                    {dataMore.map((item, i) => {
+                        return <div  style={{ marginTop: 2 }} key={i}>
+                            <span style={{ fontSize: 15 }}>{i + 1}.{' '+ item.iname}</span>
+                        </div>
+                    })}
+
+
 
 
 
