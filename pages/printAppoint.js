@@ -47,7 +47,7 @@ const PrintAppoint = () => {
             console.log(error);
         }
     };
-    
+
 
     const getDataAppoint = async () => {
         const token = localStorage.getItem("token");
@@ -63,10 +63,10 @@ const PrintAppoint = () => {
                 res.data.map((item, i) => {
                     if (item.type_item == 'ปกติ') {
                         tmp_main.push(item)
-                        tmp_price_main = tmp_price_main +  parseInt(item.price)
+                        tmp_price_main = tmp_price_main + parseInt(item.price)
                     } else {
                         tmp_more.push(item)
-                        tmp_price_more = tmp_price_more +  parseInt(item.price)
+                        tmp_price_more = tmp_price_more + parseInt(item.price)
 
                     }
                 })
@@ -82,52 +82,52 @@ const PrintAppoint = () => {
 
     return (
         <div style={{ fontFamily: 'Sarabun', marginTop: 10, width: '100%' }}   >
-            <div   style={{ backgroundColor: 'white', width: '100%', height: 750,marginLeft : 10 }}>
+            <div style={{ backgroundColor: 'white', width: '100%', height: 750, marginLeft: 10 }}>
                 {/* <div style={{ marginLeft: 20, marginRight: 2, marginTop: 10 }}> */}
-                    <div  style={{ paddingTop: 20,marginLeft : 20 }}>
-                        <span style={{ fontSize: 17, fontWeight: 'bold' }}> บัตรนัดตรวจโรค โรงพยาบาลศรีสังวรสุโขทัย</span> <span style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 80 }}> </span>
+                <div style={{ paddingTop: 20, marginLeft: 20 }}>
+                    <span style={{ fontSize: 17, fontWeight: 'bold' }}> บัตรนัดตรวจโรค โรงพยาบาลศรีสังวรสุโขทัย</span> <span style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 80 }}> </span>
+                </div>
+                <div style={{ marginTop: 7, marginBottom: 10, marginLeft: 20 }}>
+                    <span style={{ fontSize: 15, fontWeight: 'bold' }}>  คลินิก : อาชีวเวชกรรม </span>
+                </div>
+                <hr style={{ marginTop: 10, border: '1px solid  ' }} />
+                <div style={{ marginTop: 10, marginLeft: 20 }}>
+                    <span style={{ fontSize: 15, fontWeight: 'bold' }}>ชื่อ </span> <span style={{ fontSize: 14 }}>   {dataHeader != undefined ? dataHeader.tname : ''} </span>  <span style={{ fontSize: 14, marginLeft: 100 }}> อายุ  {dataHeader != undefined ? dataHeader.tage : ''} ปี   </span>
+                </div>
+                <div style={{ marginTop: 5, marginLeft: 20 }}>
+                    <span style={{ fontSize: 15, fontWeight: 'bold' }}>HN</span><span style={{ fontSize: 14 }}>   {dataHeader != undefined ? dataHeader.hn : ''} </span>
+                </div>
+                <div style={{ marginTop: 5, marginLeft: 20 }}>
+                    <span style={{ fontSize: 14, marginLeft: 0 }}><b>สิทธิการรักษา</b>   </span><span style={{ fontSize: 14, marginLeft: 0 }}>   {dataHeader != undefined ? dataHeader.ptname : ''}  </span>
+                </div>
+                <div style={{ marginTop: 5, marginLeft: 20 }}>
+                    <span style={{ fontSize: 14, fontWeight: 'bold' }}> วันที่นัด   {moment(dataHeader != undefined ? dataHeader.nextdate : '2022-01-01').format('LL')} </span>
+                    {/* <span style={{ fontSize: 14, marginLeft: 130, fontWeight: 'bold' }}> เวลานัด  {moment(dataHeader != undefined ? dataHeader.nextdate : '00:00', "HH:mm").format("hh:mm")}-{moment(dataHeader != undefined ? dataHeader.endtime : '00:00', "HH:mm").format("hh:mm")} </span> */}
+                </div>
+                <div style={{ marginTop: 5, marginLeft: 20 }}>
+                    <span style={{ fontSize: 15 }}> <b>เหตุผลการนัด</b>   </span> <span style={{ fontSize: 15 }}>   ลงจองผ่าน Line</span>
+                </div>
+
+                <hr style={{ marginTop: 10, border: '1px dashed  ' }} />
+                <div style={{ marginTop: 5, marginLeft: 20 }}>
+                    <span style={{ fontSize: 15, fontWeight: 'bold' }}><u>รายการตรวจ</u></span>
+                </div>
+
+                {dataMain.map((item, i) => {
+                    return <div style={{ marginTop: 2, marginLeft: 20 }} key={i}>
+                        <span style={{ fontSize: 15 }}>{i + 1}.{' ' + item.iname}</span>
                     </div>
-                    <div  style={{ marginTop: 7, marginBottom: 10,marginLeft : 20 }}>
-                        <span style={{ fontSize: 15, fontWeight: 'bold' }}>  คลินิก : อาชีวเวชกรรม </span>
+                })}
+
+                <div style={{ marginTop: 5, marginLeft: 20 }}>
+                    <span style={{ fontSize: 15, fontWeight: 'bold' }}><u>ตรวจเพิ่ม</u></span>
+                </div>
+
+                {dataMore.map((item, i) => {
+                    return <div style={{ marginTop: 2, marginLeft: 20 }} key={i}>
+                        <span style={{ fontSize: 15 }}>{i + 1}.{' ' + item.iname}</span>
                     </div>
-                    <hr style={{ marginTop: 10, border: '1px solid  ' }} />
-                    <div  style={{ marginTop: 10 ,marginLeft : 20}}>
-                        <span style={{ fontSize: 15, fontWeight: 'bold' }}>ชื่อ </span> <span style={{ fontSize: 14 }}>   {dataHeader != undefined ? dataHeader.tname : ''} </span>  <span style={{ fontSize: 14, marginLeft: 100 }}> อายุ  {dataHeader != undefined ? dataHeader.tage : ''} ปี   </span>
-                    </div>
-                    <div  style={{ marginTop: 5 ,marginLeft : 20}}>
-                        <span style={{ fontSize: 15, fontWeight: 'bold' }}>HN</span><span style={{ fontSize: 14 }}>   {dataHeader != undefined ? dataHeader.hn : ''} </span>
-                    </div>
-                    <div  style={{ marginTop: 5 ,marginLeft : 20}}>
-                        <span style={{ fontSize: 14, marginLeft: 0 }}><b>สิทธิการรักษา</b>   </span><span style={{ fontSize: 14, marginLeft: 0 }}>   {dataHeader != undefined ? dataHeader.ptname : ''}  </span>
-                    </div>
-                    <div  style={{ marginTop: 5 ,marginLeft : 20}}>
-                        <span style={{ fontSize: 14, fontWeight: 'bold' }}> วันที่นัด   {moment(dataHeader != undefined ? dataHeader.nextdate : '2022-01-01').format('LL')} </span>
-                        {/* <span style={{ fontSize: 14, marginLeft: 130, fontWeight: 'bold' }}> เวลานัด  {moment(dataHeader != undefined ? dataHeader.nextdate : '00:00', "HH:mm").format("hh:mm")}-{moment(dataHeader != undefined ? dataHeader.endtime : '00:00', "HH:mm").format("hh:mm")} </span> */}
-                    </div>
-                    <div  style={{ marginTop: 5 ,marginLeft : 20}}>
-                        <span style={{ fontSize: 15 }}> <b>เหตุผลการนัด</b>   </span> <span style={{ fontSize: 15 }}>   ลงจองผ่าน Line</span>
-                    </div>
-
-                    <hr style={{ marginTop: 10, border: '1px dashed  ' }} />
-                    <div  style={{ marginTop: 5 ,marginLeft : 20}}>
-                        <span style={{ fontSize: 15, fontWeight: 'bold' }}><u>รายการตรวจ</u></span>
-                    </div>
-
-                    {dataMain.map((item, i) => {
-                        return <div  style={{ marginTop: 2 ,marginLeft : 20}} key={i}>
-                            <span style={{ fontSize: 15 }}>{i + 1}.{' '+ item.iname}</span>
-                        </div>
-                    })}
-
-                    <div  style={{ marginTop: 5 ,marginLeft : 20}}>
-                        <span style={{ fontSize: 15, fontWeight: 'bold' }}><u>ตรวจเพิ่ม</u></span>
-                    </div>
-
-                    {dataMore.map((item, i) => {
-                        return <div  style={{ marginTop: 2 ,marginLeft : 20}} key={i}>
-                            <span style={{ fontSize: 15 }}>{i + 1}.{' '+ item.iname}</span>
-                        </div>
-                    })}
+                })}
 
 
 
@@ -135,11 +135,12 @@ const PrintAppoint = () => {
 
 
 
-                    {/* <button onClick={onPrint}>print</button> */}
+                {/* <button onClick={onPrint}>print</button> */}
                 {/* </div> */}
             </div>
 
-            <Button type="primary"  block size={'large'} style={{ marginTop: 10, marginBottom: 20,marginLeft : 20 }} onClick={
+            <div style={{ width: '100%', marginLeft: 10, marginTop: 10, marginBottom: 20 }}>
+                <Button type="primary" block size={'large'} onClick={
                     () => router.push({
                         pathname: '/history-detail',
                         query: { no: no },
@@ -147,6 +148,7 @@ const PrintAppoint = () => {
                 }>
                     กลับ
                 </Button>
+            </div>
         </div>
     )
 
