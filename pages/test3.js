@@ -15,7 +15,11 @@ const Test3 = () => {
   }, [])
   return (
     <div style={{ fontFamily: 'Sarabun', marginTop: 10, width: '100%' }}   >
-      <div  style={{ backgroundColor: 'white', width: '100%', height: 750, borderColor: 'black' }}>
+      <div style={{ backgroundColor: 'white', width: '100%', height: 750, borderColor: 'black' }}>
+        <div className="container" style={{ paddingTop: 20 }}>
+          bbbb
+        </div>
+
         xxxxxx
       </div>
     </div>

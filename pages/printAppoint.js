@@ -83,7 +83,7 @@ const PrintAppoint = () => {
     return (
         <div style={{ fontFamily: 'Sarabun', marginTop: 10, width: '100%' }}   >
             <div   style={{ backgroundColor: 'white', width: '100%', height: 750 }}>
-                <div style={{ marginLeft: 20, marginRight: 2, marginTop: 10 }}>
+                {/* <div style={{ marginLeft: 20, marginRight: 2, marginTop: 10 }}> */}
                     <div className="container" style={{ paddingTop: 20 }}>
                         <span style={{ fontSize: 17, fontWeight: 'bold' }}> บัตรนัดตรวจโรค โรงพยาบาลศรีสังวรสุโขทัย</span> <span style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 80 }}> </span>
                     </div>
@@ -139,7 +139,7 @@ const PrintAppoint = () => {
 
 
                     {/* <button onClick={onPrint}>print</button> */}
-                </div>
+                {/* </div> */}
             </div>
 
             <Button type="primary"  block size={'large'} style={{ marginTop: 10, marginBottom: 20 }} onClick={
