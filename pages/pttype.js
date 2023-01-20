@@ -168,7 +168,7 @@ const Pttype = () => {
             </div>
             {isLoading ? '' :
                 <div style={{ marginTop: 30, marginLeft: 20, marginRight: 20, marginBottom: 100 }} >
-                    <Button type={selectId != 0 ? "primary" : "default"} shape="round" block size={'large'} onClick={onDep} >
+                    <Button type={selectId != 0 ? "primary" : "default"}   block size={'large'} onClick={onDep} >
                         ถัดไป
                     </Button>
                 </div>}

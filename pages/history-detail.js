@@ -11,6 +11,7 @@ import Head from 'next/head'
 import * as moment from "moment";
 import "moment/locale/th";
 moment.locale("th");
+import { PrinterOutlined } from '@ant-design/icons';
 
 const BASE_URL = config.BASE_URL
 const token = config.token
@@ -56,7 +57,7 @@ const HistoryDetail = () => {
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
         // getMore()
         getData()
-        console.log(no)
+        // console.log(no)
     }, [])
 
 
@@ -100,10 +101,10 @@ const HistoryDetail = () => {
                 res.data.map((item, i) => {
                     if (item.type_item == 'ปกติ') {
                         tmp_main.push(item)
-                        tmp_price_main = tmp_price_main +  parseInt(item.price)
+                        tmp_price_main = tmp_price_main + parseInt(item.price)
                     } else {
                         tmp_more.push(item)
-                        tmp_price_more = tmp_price_more +  parseInt(item.price)
+                        tmp_price_more = tmp_price_more + parseInt(item.price)
 
                     }
                 })
@@ -162,10 +163,10 @@ const HistoryDetail = () => {
                         </div>
                         <div className='col-11'>
                             <div className='row' style={{ fontSize: 15 }}>
-                                สิทธิ : {dataMain.length > 0 ? dataMain[0].ptname : ''}   
+                                สิทธิ : {dataMain.length > 0 ? dataMain[0].ptname : ''}
                             </div>
                             <div className='row' style={{ fontSize: 15, paddingTop: 8 }}>
-                                วันที่จอง  : { moment(dataMain.length > 0 ? dataMain[0].nextdate : '2000-00-01').format('LL').replace('2023','2566')   }
+                                วันที่จอง  : {moment(dataMain.length > 0 ? dataMain[0].nextdate : '2000-00-01').format('LL').replace('2023', '2566')}
                             </div>
                         </div>
                     </div>
@@ -204,7 +205,7 @@ const HistoryDetail = () => {
 
                                         return < >
                                             <Col span={20} style={{ marginBottom: 3 }} >
-                                               {i+1 }. {item.iname}
+                                                {i + 1}. {item.iname}
                                             </Col>
                                             <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
                                                 {item.price}
@@ -257,7 +258,7 @@ const HistoryDetail = () => {
 
                                         return < >
                                             <Col span={20} style={{ marginBottom: 3 }} >
-                                            {i+1 }. {item.iname}
+                                                {i + 1}. {item.iname}
                                             </Col>
                                             <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
                                                 {item.price}
@@ -303,7 +304,17 @@ const HistoryDetail = () => {
 
                     </div>
 
+
+
                 }
+                <Button type="primary" icon={<PrinterOutlined />} block size={'large'} style={{ marginTop: 10, marginBottom: 20 }} onClick={
+                    () => router.push({
+                        pathname: '/printAppoint',
+                        query: { no: no },
+                    })
+                }>
+                    ใบนัด
+                </Button>
             </div>
         </div>
 
