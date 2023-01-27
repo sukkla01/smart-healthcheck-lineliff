@@ -34,7 +34,7 @@ const ApproveA = () => {
     const [sumMore, setSumMore] = useState(0)
     const [sumTotal, setSumTotal] = useState(0)
 
-    const { dep, dataMainSend, dataMoreSend ,selectdate } = router.query;
+    const { dep, dataMainSend, dataMoreSend, selectdate } = router.query;
 
     useEffect(() => {
 
@@ -123,7 +123,7 @@ const ApproveA = () => {
 
         } catch (error) {
             console.log(error)
-            
+
         }
     }
 
@@ -135,14 +135,14 @@ const ApproveA = () => {
             let tmp_data = []
             let tmp_dataMoreSend = []
             // let d = JSON.parse(dataMoreSend).split(',')
-            if(typeof(dataMoreSend) == 'string'){
+            if (typeof (dataMoreSend) == 'string') {
                 let d = dataMoreSend.split(',')
                 // tmp_dataMoreSend = dataMoreSend === '' ? [] : dataMoreSend
-                tmp_dataMoreSend =  dataMoreSend === '' ? [] : dataMoreSend.split(',')
-            }else{
+                tmp_dataMoreSend = dataMoreSend === '' ? [] : dataMoreSend.split(',')
+            } else {
                 tmp_dataMoreSend = dataMoreSend
             }
-            
+
 
             tmp_dataMoreSend.map((val, i) => {
                 const result = res.data.filter((e) => e.id == val)
@@ -163,20 +163,20 @@ const ApproveA = () => {
         console.log(dataMainSend)
         console.log(dataMoreSend)
         let data = {
-            dataMainSend :  dataMainSend,
-            dataMoreSend :  dataMoreSend,
-            date : selectdate,
-            depsend : dep,
-            profile : profile,
-            hn : hn
+            dataMainSend: dataMainSend,
+            dataMoreSend: dataMoreSend,
+            date: selectdate,
+            depsend: dep,
+            profile: profile,
+            hn: hn
         }
 
         try {
-            let res = await axios.post(`${BASE_URL}/add-appoint`,data, { headers: { "token": token } })
+            let res = await axios.post(`${BASE_URL}/add-appoint`, data, { headers: { "token": token } })
             router.push({
                 pathname: 'appoint-success',
             });
-        
+
         } catch (error) {
             console.log(error)
         }
@@ -212,7 +212,7 @@ const ApproveA = () => {
                 </div>
                 {/* Profile */}
                 {/* detail */}
-                <div style={{ backgroundColor: 'white', height: 90, borderRadius: 15,marginTop : 10 }}>
+                <div style={{ backgroundColor: 'white', height: 90, borderRadius: 15, marginTop: 10 }}>
                     <div className='row' style={{ paddingTop: 15, paddingLeft: 10 }}>
                         <div className='col-1'>
 
@@ -222,7 +222,7 @@ const ApproveA = () => {
                                 สิทธิ : {depName}
                             </div>
                             <div className='row' style={{ fontSize: 15, paddingTop: 8 }}>
-                                วันที่จอง  : { moment(selectdate).format('LL').replace('2023','2566')   }
+                                วันที่จอง  : {moment(selectdate).format('LL').replace('2023', '2566')}
                             </div>
                         </div>
                     </div>
@@ -261,7 +261,7 @@ const ApproveA = () => {
 
                                         return < >
                                             <Col span={20} style={{ marginBottom: 3 }} >
-                                               {i+1 }. {item.name}
+                                                {i + 1}. {item.name}
                                             </Col>
                                             <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
                                                 {item.price}
@@ -288,7 +288,7 @@ const ApproveA = () => {
                             </Row>
                         </Card>
 
-                        <Card style={{ marginLeft: 10, width: '95%', marginTop: 20 }}>
+                        {dep == 3 ? <Card style={{ marginLeft: 10, width: '95%', marginTop: 20 }}>
                             <Row>
                                 <Col span={24} style={{ marginBottom: 10, marginTop: -15 }}>
                                     <div style={{ fontSize: 16, fontWeight: 'bold' }}>รายการตรวจเพิ่ม</div>
@@ -299,47 +299,64 @@ const ApproveA = () => {
                             <Row>
                                 <Col span={20} style={{ marginBottom: 3 }}>
 
-                                    <b> รายการ</b>
+                                    <b style={{ color: 'red' }}> เจ้าหน้าที่จะทำการเช็คสิทธิในระบบประกันสังคมและจะติดต่อกลับเพื่อแจ้งรายการที่ท่านสามารถตรวจได้</b>
 
                                 </Col>
-                                <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
-                                    <b>ราคา</b>
-                                </Col>
-
                             </Row>
-                            <hr style={{ marginTop: 0, marginBottom: 8 }} />
-                            {dataMoreCheck.length > 0 ?
+
+                        </Card> :
+                            <Card style={{ marginLeft: 10, width: '95%', marginTop: 20 }}>
                                 <Row>
-                                    {dataMoreCheck.map((item, i) => {
+                                    <Col span={24} style={{ marginBottom: 10, marginTop: -15 }}>
+                                        <div style={{ fontSize: 16, fontWeight: 'bold' }}>รายการตรวจเพิ่ม</div>
 
-                                        return < >
-                                            <Col span={20} style={{ marginBottom: 3 }} >
-                                            {i+1 }. {item.name}
-                                            </Col>
-                                            <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
-                                                {item.price}
-                                            </Col>
-                                        </>
-                                    })}
-
-
+                                    </Col>
 
                                 </Row>
-                                : 'ไม่มีตรวจเพิ่ม'}
-                            <hr />
-                            <Row>
-                                <Col span={20} style={{ marginBottom: 3 }}>
+                                <Row>
+                                    <Col span={20} style={{ marginBottom: 3 }}>
 
-                                    <b> รวมค่าใช้จ่ายหลัก (บาท)</b>
+                                        <b> รายการ</b>
+
+                                    </Col>
+                                    <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
+                                        <b>ราคา</b>
+                                    </Col>
+
+                                </Row>
+                                <hr style={{ marginTop: 0, marginBottom: 8 }} />
+                                {dataMoreCheck.length > 0 ?
+                                    <Row>
+                                        {dataMoreCheck.map((item, i) => {
+
+                                            return < >
+                                                <Col span={20} style={{ marginBottom: 3 }} >
+                                                    {i + 1}. {item.name}
+                                                </Col>
+                                                <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
+                                                    {item.price}
+                                                </Col>
+                                            </>
+                                        })}
 
 
-                                </Col>
-                                <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
-                                    <b>{sumMore}</b>
-                                </Col>
 
-                            </Row>
-                        </Card>
+                                    </Row>
+                                    : 'ไม่มีตรวจเพิ่ม'}
+                                <hr />
+                                <Row>
+                                    <Col span={20} style={{ marginBottom: 3 }}>
+
+                                        <b> รวมค่าใช้จ่ายหลัก (บาท)</b>
+
+
+                                    </Col>
+                                    <Col span={4} style={{ marginBottom: 3, textAlign: 'right' }}>
+                                        <b>{sumMore}</b>
+                                    </Col>
+
+                                </Row>
+                            </Card>}
 
 
                         <Card style={{ marginLeft: 10, width: '95%', marginTop: 10 }}>

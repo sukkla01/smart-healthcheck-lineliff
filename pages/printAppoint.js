@@ -98,7 +98,10 @@ const PrintAppoint = () => {
                     <span style={{ fontSize: 15, fontWeight: 'bold' }}>HN</span><span style={{ fontSize: 14 }}>   {dataHeader != undefined ? dataHeader.hn : ''} </span>
                 </div>
                 <div style={{ marginTop: 5, marginLeft: 20 }}>
-                    <span style={{ fontSize: 14, marginLeft: 0 }}><b>สิทธิการรักษา</b>   </span><span style={{ fontSize: 14, marginLeft: 0 }}>   {dataHeader != undefined ? dataHeader.ptname : ''}  </span>
+                    <span style={{ fontSize: 14, marginLeft: 0 }}><b>สิทธิการรักษา</b>   </span><span style={{ fontSize: 14, marginLeft: 0 }}>   {dataHeader != undefined ? dataHeader.tp2name : ''}  </span>
+                </div>
+                <div style={{ marginTop: 5, marginLeft: 20 }}>
+                    <span style={{ fontSize: 14, marginLeft: 0 }}><b>สิทธิใช้ในการตรวจสุขภาพ </b>   </span><span style={{ fontSize: 14, marginLeft: 0 }}>   {dataHeader != undefined ? dataHeader.ptname : ''}  </span>
                 </div>
                 <div style={{ marginTop: 5, marginLeft: 20 }}>
                     <span style={{ fontSize: 14, fontWeight: 'bold' }}> วันที่นัด   {moment(dataHeader != undefined ? dataHeader.nextdate : '2022-01-01').format('LL')} </span>
