@@ -185,7 +185,7 @@ const AppDate = () => {
             <div style={{ marginTop: 15, marginLeft: 15, marginRight: 10 }}>
                 <p style={{ fontSize: 20 }} className="text-center">
                     <Alert
-                        message={'เปิดการจองเฉพาะวันอังคาร กับ พฤหัส'}
+                        message={'เปิดการจองเฉพาะวันจันทร์ กับ พฤหัส'}
                         type={"info"}
                         showIcon
                     />
