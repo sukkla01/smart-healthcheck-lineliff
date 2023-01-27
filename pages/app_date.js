@@ -121,7 +121,7 @@ const AppDate = () => {
         } else if (tmp == 0) {
             setSDateShow("ไม่สามารถเลือกวันปัจจุบันได้");
             setIsNext(false);
-        } else if (day == 2 || day == 4) {
+        } else if (day == 1 || day == 4) {
             setSDateShow(
                 moment(value).add(543, "year").format("LL") + " ---> จองได้"
             );
