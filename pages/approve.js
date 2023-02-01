@@ -58,7 +58,7 @@ const ApproveA = () => {
         }
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
         // getMore()
-        getData()
+        getData()  
         getPttype()
     }, [])
 
@@ -226,7 +226,7 @@ const ApproveA = () => {
                         </div>
                         <div className='col-8'>
                             <div className='row' style={{ fontSize: 15 }}>
-                                ชื่อ-สกุล : {tname}
+                                ชื่อ-สกุลxx : {tname}
                             </div>
                             <div className='row' style={{ fontSize: 15, paddingTop: 8 }}>
                                 HN : {hn}
