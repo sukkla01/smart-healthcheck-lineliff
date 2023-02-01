@@ -30,6 +30,7 @@ const AppDate = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { dep, dataMainSend, dataMoreSend } = router.query;
     const [depName, setDepName] = useState('')
+  
 
 
 
@@ -54,7 +55,9 @@ const AppDate = () => {
 
         getData()
         getPttype()
+        
     }, [])
+
 
 
     const getPttype = async (userId) => {
@@ -147,7 +150,7 @@ const AppDate = () => {
         if (IsNext) {
             router.push({
                 pathname: 'approve',
-                query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend: dataMoreSend, selectdate: date },
+                query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend: dataMoreSend, selectdate: date  },
             });
         }
     };

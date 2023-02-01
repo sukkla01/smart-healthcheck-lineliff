@@ -17,6 +17,9 @@ const token = config.token
 export const Section = styled('div')`
 flex flex-wrap content-center justify-center w-100 h-100`;
 
+
+let dataAlert = [26,27,28,37,38,47,48,54,55,63,64,68,69,73,74]
+
 const ApproveA = () => {
     const router = useRouter()
     const [profile, setProfile] = useState({})
@@ -50,11 +53,11 @@ const ApproveA = () => {
             localStorage.setItem('picture', profile.pictureUrl);
 
             getCid(profile.userId, profile.pictureUrl)
+     
 
         }
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
         // getMore()
-        getItemAlert()
         getData()
         getPttype()
     }, [])
@@ -73,31 +76,7 @@ const ApproveA = () => {
         }
     }
 
-    const getItemAlert = async (value) => {
-        try {
-            let res = await axios.get(`${BASE_URL}/get-item-alert`, { headers: { "token": token } })
-            console.log(res.data)
-            console.log(dataMainCheck)
-            if (res.data.length > 0) {
-                res.data.map((item,i)=>{
-                    const r = dataMainSend.filter((e) => e.id == item.id)
-                    const m = dataMoreSend.filter((e) => e.id == item.id)
-                    if(r.length > 0){
-                        setInfoAlert(true)
-                        return '';
-                    }
-                    if(m.length > 0){
-                        setInfoAlert(true)
-                        return '';
-                    }
-                })
-               
-               
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
+  
 
 
     const getCid = async (userId, pictureUrl) => {
@@ -146,6 +125,16 @@ const ApproveA = () => {
             setDataMainCheck(tmp_data)
             setSumMain(tmp_price)
             getMore(tmp_price)
+
+
+            tmp_data.map((item,i)=>{
+                const r = dataAlert.filter((e) => e == item.id)
+                console.log(r)
+                if(r.length > 0){
+                    setInfoAlert(true)
+                    return '';
+                }
+            })
             
 
 
@@ -183,6 +172,14 @@ const ApproveA = () => {
             setSumMore(tmp_price)
             setSumTotal(tmp_price + val)
             setIsLoading(false)
+            tmp_data.map((item,i)=>{
+                const r = dataAlert.filter((e) => e == item.id)
+                console.log(r)
+                if(r.length > 0){
+                    setInfoAlert(true)
+                    return '';
+                }
+            })
 
 
         } catch (error) {
