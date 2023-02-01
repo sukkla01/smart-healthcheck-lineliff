@@ -54,8 +54,8 @@ const ApproveA = () => {
         }
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
         // getMore()
-        getData()
         getItemAlert()
+        getData()
         getPttype()
     }, [])
 
@@ -73,15 +73,15 @@ const ApproveA = () => {
         }
     }
 
-    const getItemAlert = async (userId) => {
+    const getItemAlert = async (value) => {
         try {
             let res = await axios.get(`${BASE_URL}/get-item-alert`, { headers: { "token": token } })
             console.log(res.data)
             console.log(dataMainCheck)
             if (res.data.length > 0) {
                 res.data.map((item,i)=>{
-                    const r = dataMainCheck.filter((e) => e.id == item.id)
-                    const m = dataMoreCheck.filter((e) => e.id == item.id)
+                    const r = dataMainSend.filter((e) => e.id == item.id)
+                    const m = dataMoreSend.filter((e) => e.id == item.id)
                     if(r.length > 0){
                         setInfoAlert(true)
                         return '';
@@ -146,6 +146,7 @@ const ApproveA = () => {
             setDataMainCheck(tmp_data)
             setSumMain(tmp_price)
             getMore(tmp_price)
+            
 
 
 
