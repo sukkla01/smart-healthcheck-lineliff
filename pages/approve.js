@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import NavHeader from '../component/NavHeader'
 import { useRouter } from 'next/router'
 import ProfilePage from '../component/ProfilePage'
-import { Button, Checkbox, Divider, Row, Col, Card } from 'antd';
+import { Button, Checkbox, Divider, Row, Col, Card, Alert} from 'antd';
 import axios from 'axios'
 import config from '../config'
 import ReactLoading from 'react-loading';
@@ -25,6 +25,7 @@ const ApproveA = () => {
     const [depName, setDepName] = useState('')
     const [tname, setTname] = useState('')
     const [isLoading, setIsLoading] = useState(true);
+    const [infoAlert, setInfoAlert] = useState(false);
     const [dataMain, setDataMain] = useState([])
     const [dataMainCheck, setDataMainCheck] = useState([])
     const [dataMore, setDataMore] = useState([])
@@ -54,6 +55,7 @@ const ApproveA = () => {
         // getCid('U1b5792c2049b94a34abc87eedf946d2a', '')
         // getMore()
         getData()
+        getItemAlert()
         getPttype()
     }, [])
 
@@ -70,6 +72,33 @@ const ApproveA = () => {
             console.log(error)
         }
     }
+
+    const getItemAlert = async (userId) => {
+        try {
+            let res = await axios.get(`${BASE_URL}/get-item-alert`, { headers: { "token": token } })
+            console.log(res.data)
+            console.log(dataMainCheck)
+            if (res.data.length > 0) {
+                res.data.map((item,i)=>{
+                    const r = dataMainCheck.filter((e) => e.id == item.id)
+                    const m = dataMoreCheck.filter((e) => e.id == item.id)
+                    if(r.length > 0){
+                        setInfoAlert(true)
+                        return '';
+                    }
+                    if(m.length > 0){
+                        setInfoAlert(true)
+                        return '';
+                    }
+                })
+               
+               
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     const getCid = async (userId, pictureUrl) => {
         try {
@@ -228,6 +257,16 @@ const ApproveA = () => {
                     </div>
                 </div>
                 {/* detail */}
+                {infoAlert ? 
+                <div style={{ marginTop: 15, marginLeft: 15, marginRight: 10 }}>
+                    <p style={{ fontSize: 20 }} className="text-center">
+                        <Alert
+                            message= '   กรุณางดน้ำและอาหาร หลัง 20.00 น.  (สามารถจิบน้ำเปล่าได้เล็กน้อย)'
+                            type={"warning"}
+                            showIcon
+                        />
+                    </p>
+                </div> : '' }
 
                 {isLoading ? <div className='text-center'>
                     <Section>
