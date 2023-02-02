@@ -226,7 +226,7 @@ const ApproveA = () => {
                         </div>
                         <div className='col-8'>
                             <div className='row' style={{ fontSize: 15 }}>
-                                ชื่อ-สกุลxx : {tname}
+                                ชื่อ-สกุล : {tname}
                             </div>
                             <div className='row' style={{ fontSize: 15, paddingTop: 8 }}>
                                 HN : {hn}
@@ -256,7 +256,7 @@ const ApproveA = () => {
                 </div>
                 {/* detail */}
                 {infoAlert ? 
-                <div style={{ marginTop: 15, marginLeft: 15, marginRight: 10 }}>
+                <div style={{ marginTop: 5, marginLeft: 15, marginRight: 10 }}>
                     <p style={{ fontSize: 20 }} className="text-center">
                         <Alert
                             message= '   กรุณางดน้ำและอาหาร หลัง 20.00 น.  (สามารถจิบน้ำเปล่าได้เล็กน้อย)'
