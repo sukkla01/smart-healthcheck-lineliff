@@ -21,7 +21,7 @@ const OappPrint = () => {
 
         getHeader()
        
-        // getLab()
+        // getLab()  vvv
         // getXray()
 
 
