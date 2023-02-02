@@ -272,7 +272,7 @@ const ApproveA = () => {
 
                     <div className='row' >
 
-                        <Card style={{ marginLeft: 10, width: '95%', marginTop: 15 }}>
+                        <Card style={{ marginLeft: 10, width: '95%', marginTop: 5 }}>
                             <Row>
                                 <Col span={24} style={{ marginBottom: 10, marginTop: -15 }}>
                                     <div style={{ fontSize: 16, fontWeight: 'bold' }}>รายการตรวจหลัก</div>
