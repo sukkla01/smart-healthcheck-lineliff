@@ -141,7 +141,7 @@ const PrintAppoint = () => {
                 {/* </div> */}
             </div>
 
-            <div style={{ width: '100%', marginLeft: 10, marginTop: 10, marginBottom: 20 }}>
+            <div style={{ width: '100%', marginTop: 10, marginBottom: 20 }}>
                 <Button type="primary" block size={'large'} onClick={
                     () => router.push({
                         pathname: '/history-detail',
