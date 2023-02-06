@@ -81,11 +81,10 @@ const PrintAppoint = () => {
 
 
     return (
-        <div style={{ fontFamily: 'Sarabun', marginTop: 10, width: '100%' }}   >
-            <div style={{ backgroundColor: 'white', width: '100%', height: 750, marginLeft: 10 }}>
-                {/* <div style={{ marginLeft: 20, marginRight: 2, marginTop: 10 }}> */}
-                <div style={{ paddingTop: 20, marginLeft: 20 }}>
-                    <span style={{ fontSize: 17, fontWeight: 'bold' }}> บัตรนัดตรวจสุขภาพ โรงพยาบาลศรีสังวรสุโขทัย</span> <span style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 80 }}> </span>
+        <div className="Container" style={{ fontFamily: 'Sarabun', padding: 10 }}   >
+            <div style={{ backgroundColor: 'white', width: '100%', height: 750 }}>
+                <div style={{ paddingTop: 20, textAlign: 'left', marginLeft: 20  }}>
+                    <span style={{ fontSize: 17, fontWeight: 'bold' }}> บัตรนัดตรวจสุขภาพ โรงพยาบาลศรีสังวรสุโขทัย</span>
                 </div>
                 <div style={{ marginTop: 7, marginBottom: 10, marginLeft: 20 }}>
                     <span style={{ fontSize: 15, fontWeight: 'bold' }}>  คลินิก : อาชีวเวชกรรม </span>
