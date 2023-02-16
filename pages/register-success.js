@@ -59,11 +59,11 @@ const RegisterSuccess = () => {
                             <QRCode value={data[0].hn}  size ={120}/>
                         </div>
 
-                        <div style={{ marginTop: 30, marginLeft: 20, marginRight: 20, marginBottom: 100 }} >
+                        {/* <div style={{ marginTop: 30, marginLeft: 20, marginRight: 20, marginBottom: 100 }} >
                             <Button type= "danger"  shape="round" block size={'large'} onClick={onLogout} >
                                 ยกเลิกการลงทะเบียน
                             </Button>
-                        </div>
+                        </div> */}
 
                     </div>
                 </div> : ''}
