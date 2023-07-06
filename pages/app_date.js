@@ -30,7 +30,7 @@ const AppDate = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { dep, dataMainSend, dataMoreSend } = router.query;
     const [depName, setDepName] = useState('')
-  
+
 
 
 
@@ -55,7 +55,7 @@ const AppDate = () => {
 
         getData()
         getPttype()
-        
+
     }, [])
 
 
@@ -118,6 +118,9 @@ const AppDate = () => {
         if (tmp < 0) {
             setSDateShow("ไม่สามารถจองย้อนหลังได้ กรุณาเลือกวันอื่น");
             setIsNext(false);
+        } else if (tmp < 3) {
+            setSDateShow("กรุณาจองล่วงหน้าก่อน 2 วัน");
+            setIsNext(false);
         } else if (day == 0 || day == 6) {
             setSDateShow("ไม่สามารถจองวันหยุดเสาร์-อาทิตย์  ได้");
             setIsNext(false);
@@ -150,7 +153,7 @@ const AppDate = () => {
         if (IsNext) {
             router.push({
                 pathname: 'approve',
-                query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend: dataMoreSend, selectdate: date  },
+                query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend: dataMoreSend, selectdate: date },
             });
         }
     };
