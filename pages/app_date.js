@@ -127,6 +127,9 @@ const AppDate = () => {
         } else if (tmp == 0) {
             setSDateShow("ไม่สามารถเลือกวันปัจจุบันได้");
             setIsNext(false);
+        } else if (start == '2024-11-14') {
+            setSDateShow("ไม่สามารถจองได้กรุณาติดต่อเจ้าหน้าที่");
+            setIsNext(false);
         } else if (day == 1 || day == 4) {
             setSDateShow(
                 moment(value).add(543, "year").format("LL") + " ---> จองได้"
