@@ -182,7 +182,7 @@ const AppDate = () => {
             } else {
                 const slotsLeft = MAX_BOOKING_PER_DAY - count;
                 setSDateShow(
-                    moment(value).add(543, "year").format("LL") + " ---> จองได้ (เหลือ " + slotsLeft + "/" + MAX_BOOKING_PER_DAY + " คน)"
+                    moment(value).add(543, "year").format("LL") + " ---> จองได้ (เหลือ " + slotsLeft  + " คน)"
                 );
                 setDate(nextdate)
                 setIsNext(true);
@@ -317,6 +317,7 @@ const AppDate = () => {
                         block
                         size={"large"}
                         onClick={onNext}
+                        disabled={!IsNext}
                     >
                         ถัดไป
                     </Button>
