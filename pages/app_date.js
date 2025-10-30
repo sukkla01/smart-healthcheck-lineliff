@@ -170,15 +170,19 @@ const AppDate = () => {
             const count = await checkBookingCount(nextdate, dep);
             setBookingCount(count);
             
+            console.log("จำนวนคนจองแล้ว:", count, "/ Max:", MAX_BOOKING_PER_DAY);
+            
+            // ถ้าจองครบ 5 คนแล้ว ไม่ให้จองเพิ่ม
             if (count >= MAX_BOOKING_PER_DAY) {
                 setSDateShow(
-                    moment(value).add(543, "year").format("LL") + " ---> เต็มแล้ว (จองไปแล้ว " + count + "/" + MAX_BOOKING_PER_DAY + " คน)"
+                    moment(value).add(543, "year").format("LL") + " ---> เต็มแล้ว! (จองครบ " + MAX_BOOKING_PER_DAY + "/" + MAX_BOOKING_PER_DAY + " คน)"
                 );
                 setDate(nextdate)
                 setIsNext(false);
             } else {
+                const slotsLeft = MAX_BOOKING_PER_DAY - count;
                 setSDateShow(
-                    moment(value).add(543, "year").format("LL") + " ---> จองได้ (เหลือ " + (MAX_BOOKING_PER_DAY - count) + "/" + MAX_BOOKING_PER_DAY + " คน)"
+                    moment(value).add(543, "year").format("LL") + " ---> จองได้ (เหลือ " + slotsLeft + "/" + MAX_BOOKING_PER_DAY + " คน)"
                 );
                 setDate(nextdate)
                 setIsNext(true);
@@ -201,11 +205,13 @@ const AppDate = () => {
 
     const onNext = (value) => {
         let path = countSlot > 0 ? "/queue-time" : "/queue-success";
-        if (IsNext) {
+        if (IsNext && bookingCount < MAX_BOOKING_PER_DAY) {
             router.push({
                 pathname: 'approve',
                 query: { dep: dep, dataMainSend: dataMainSend, dataMoreSend: dataMoreSend, selectdate: date },
             });
+        } else {
+            console.log("ไม่สามารถจองได้ - จองเต็มแล้วหรือไม่ได้เลือกวันที่ถูกต้อง");
         }
     };
     return (
