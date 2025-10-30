@@ -30,6 +30,8 @@ const AppDate = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { dep, dataMainSend, dataMoreSend } = router.query;
     const [depName, setDepName] = useState('')
+    const [bookingCount, setBookingCount] = useState(0);
+    const MAX_BOOKING_PER_DAY = 5;
 
 
 
@@ -99,6 +101,21 @@ const AppDate = () => {
         }
     }
 
+    const checkBookingCount = async (selectedDate, depId) => {
+        try {
+            let res = await axios.get(`${BASE_URL}/check-booking-count/${selectedDate}/${depId}`, { 
+                headers: { "token": token } 
+            })
+            if (res.data && res.data.count !== undefined) {
+                return res.data.count;
+            }
+            return 0;
+        } catch (error) {
+            console.log(error)
+            return 0;
+        }
+    }
+
     async function onPanelChange(value, mode) {
 
         const d = new Date(value);
@@ -115,31 +132,62 @@ const AppDate = () => {
         let end = moment(moment(now_).format("YYYY-MM-DD"), "YYYY-MM-DD");
 
         let tmp = moment.duration(start.diff(end)).asDays();
+        
+        // เช็คว่าวันนี้เป็นวันศุกร์หรือไม่
+        const currentDay = now_.getDay();
+        const currentHour = now_.getHours();
+        
+        // ถ้าวันนี้เป็นวันศุกร์และเวลาเกิน 15:00 และเลือกวันจันทร์ถัดไป
+        const isFridayAfter3PM = currentDay === 5 && currentHour >= 15;
+        const isSelectingNextMonday = day === 1 && tmp === 3;
+        
         if (tmp < 0) {
             setSDateShow("ไม่สามารถจองย้อนหลังได้ กรุณาเลือกวันอื่น");
             setIsNext(false);
+            setBookingCount(0);
         } else if (tmp < 3) {
             setSDateShow("กรุณาจองล่วงหน้าก่อน 2 วัน");
             setIsNext(false);
+            setBookingCount(0);
+        } else if (isFridayAfter3PM && isSelectingNextMonday) {
+            setSDateShow("วันศุกร์หลัง 15:00 น. ไม่สามารถจองวันจันทร์ได้");
+            setIsNext(false);
+            setBookingCount(0);
         } else if (day == 0 || day == 6) {
             setSDateShow("ไม่สามารถจองวันหยุดเสาร์-อาทิตย์  ได้");
             setIsNext(false);
+            setBookingCount(0);
         } else if (tmp == 0) {
             setSDateShow("ไม่สามารถเลือกวันปัจจุบันได้");
             setIsNext(false);
+            setBookingCount(0);
         } else if (nextdate == '2024-11-14') {
             setSDateShow("ไม่สามารถจองได้กรุณาติดต่อเจ้าหน้าที่");
             setIsNext(false);
+            setBookingCount(0);
         } else if (day == 1 || day == 4) {
-            setSDateShow(
-                moment(value).add(543, "year").format("LL") + " ---> จองได้"
-            );
-            setDate(nextdate)
-            setIsNext(true);
+            // เช็คจำนวนการจองในวันที่เลือก
+            const count = await checkBookingCount(nextdate, dep);
+            setBookingCount(count);
+            
+            if (count >= MAX_BOOKING_PER_DAY) {
+                setSDateShow(
+                    moment(value).add(543, "year").format("LL") + " ---> เต็มแล้ว (จองไปแล้ว " + count + "/" + MAX_BOOKING_PER_DAY + " คน)"
+                );
+                setDate(nextdate)
+                setIsNext(false);
+            } else {
+                setSDateShow(
+                    moment(value).add(543, "year").format("LL") + " ---> จองได้ (เหลือ " + (MAX_BOOKING_PER_DAY - count) + "/" + MAX_BOOKING_PER_DAY + " คน)"
+                );
+                setDate(nextdate)
+                setIsNext(true);
+            }
 
         } else {
             setSDateShow("ไม่เปิดการจองตรวจ");
             setIsNext(false);
+            setBookingCount(0);
         }
 
     }

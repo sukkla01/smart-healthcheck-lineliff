@@ -37,6 +37,7 @@ const ApproveA = () => {
     const [sumMain, setSumMain] = useState(0)
     const [sumMore, setSumMore] = useState(0)
     const [sumTotal, setSumTotal] = useState(0)
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const { dep, dataMainSend, dataMoreSend, selectdate } = router.query;
 
@@ -187,6 +188,9 @@ const ApproveA = () => {
         }
     }
     const submit = async () => {
+        if (isSubmitting) return; // ป้องกันการกดซ้ำ
+        
+        setIsSubmitting(true);
         console.log(dataMainSend)
         console.log(dataMoreSend)
         let data = {
@@ -206,6 +210,7 @@ const ApproveA = () => {
 
         } catch (error) {
             console.log(error)
+            setIsSubmitting(false); // ถ้าเกิด error ให้กดได้อีก
         }
 
 
@@ -432,8 +437,17 @@ const ApproveA = () => {
                             </Button>
                         </Col>
                         <Col span={12}>
-                            <Button type={"primary"} block shape="round" size={'large'} style={{ marginLeft: 5 }} onClick={submit} >
-                                ยืนยัน
+                            <Button 
+                                type={"primary"} 
+                                block 
+                                shape="round" 
+                                size={'large'} 
+                                style={{ marginLeft: 5 }} 
+                                onClick={submit}
+                                disabled={isSubmitting}
+                                loading={isSubmitting}
+                            >
+                                {isSubmitting ? 'กำลังยืนยัน...' : 'ยืนยัน'}
                             </Button>
                         </Col>
                     </Row>
