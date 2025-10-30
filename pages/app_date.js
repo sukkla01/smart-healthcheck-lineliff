@@ -101,9 +101,9 @@ const AppDate = () => {
         }
     }
 
-    const checkBookingCount = async (selectedDate, depId) => {
+    const checkBookingCount = async (selectedDate) => {
         try {
-            let res = await axios.get(`${BASE_URL}/check-booking-count/${selectedDate}/${depId}`, { 
+            let res = await axios.get(`${BASE_URL}/check-booking-count/${selectedDate}`, { 
                 headers: { "token": token } 
             })
             if (res.data && res.data.count !== undefined) {
@@ -167,7 +167,7 @@ const AppDate = () => {
             setBookingCount(0);
         } else if (day == 1 || day == 4) {
             // เช็คจำนวนการจองในวันที่เลือก
-            const count = await checkBookingCount(nextdate, dep);
+            const count = await checkBookingCount(nextdate);
             setBookingCount(count);
             
             console.log("จำนวนคนจองแล้ว:", count, "/ Max:", MAX_BOOKING_PER_DAY);
