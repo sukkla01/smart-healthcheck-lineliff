@@ -165,6 +165,10 @@ const AppDate = () => {
             setSDateShow("ไม่สามารถจองได้กรุณาติดต่อเจ้าหน้าที่");
             setIsNext(false);
             setBookingCount(0);
+        } else if (moment(nextdate).isBetween('2025-12-22', '2026-01-04', undefined, '[]')) {
+            setSDateShow("งดให้บริการจองระหว่าง 22 ธ.ค. 68 - 4 ม.ค. 69");
+            setIsNext(false);
+            setBookingCount(0);
         } else if (day == 1 || day == 4) {
             // เช็คจำนวนการจองในวันที่เลือก
             const count = await checkBookingCount(nextdate);
