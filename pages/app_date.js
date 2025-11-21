@@ -161,10 +161,6 @@ const AppDate = () => {
             setSDateShow("ไม่สามารถเลือกวันปัจจุบันได้");
             setIsNext(false);
             setBookingCount(0);
-        } else if (nextdate == '2024-11-14') {
-            setSDateShow("ไม่สามารถจองได้กรุณาติดต่อเจ้าหน้าที่");
-            setIsNext(false);
-            setBookingCount(0);
         } else if (moment(nextdate).isBetween('2025-12-22', '2026-01-04', undefined, '[]')) {
             setSDateShow("งดให้บริการจองระหว่าง 22 ธ.ค. 68 - 4 ม.ค. 69");
             setIsNext(false);
@@ -174,7 +170,7 @@ const AppDate = () => {
             const count = await checkBookingCount(nextdate);
             setBookingCount(count);
             
-            console.log("จำนวนคนจองแล้ว:", count, "/ Max:", MAX_BOOKING_PER_DAY);
+            // console.log("จำนวนคนจองแล้ว:", count, "/ Max:", MAX_BOOKING_PER_DAY);
             
             // ถ้าจองครบ 5 คนแล้ว ไม่ให้จองเพิ่ม
             if (count >= MAX_BOOKING_PER_DAY) {
